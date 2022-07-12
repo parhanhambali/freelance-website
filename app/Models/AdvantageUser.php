@@ -6,11 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class DetailUser extends Model
+class AdvantageUser extends Model
 {
+     // use HasFactory;
     use SoftDeletes;
 
-    public $table = 'detail_user';
+    public $table = 'advantage_user';
 
     protected $dates = [
         'updated_at',
@@ -19,26 +20,16 @@ class DetailUser extends Model
     ];
 
     protected $fillable = [
-        'userd_id',
-        'photo',
-        'role',
-        'contact_number',
-        'biography',
+        'service_id',
+        'advantage',
         'updated_at',
         'created_at',
         'deleted_at'
     ];
 
-    // one to one
-    public function user()
-    {
-        return $this->belongsTo('App/Models/User', 'users_id', 'id');
-    }
-
     // one to many
-    public function experience_user()
+    public function service()
     {
-        return $this->hasMany('App\Models\ExperienceUser', 'detail_user_id');
+        return $this->belongsTo('App/Models/Service', 'service_id', 'id');
     }
-
 }
